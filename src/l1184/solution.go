@@ -19,25 +19,27 @@ Tips:
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 
-//TODO: 待解决
 func distanceBetweenBusStops(distance []int, start int, destination int) int {
 	optimalDst := 0
+
+	clockWiseIndex := start
 	clockWiseDst := 0
+
 	counterClockWiseDst := 0
-	for i := 0; i < len(distance); i++ {
-		//1. 顺时针
-		if i >= start && i < destination {
-			clockWiseDst += distance[i]
+
+	for {
+		if clockWiseIndex == destination {
+			break
 		}
-		//2. 逆时针
-		if i == start || i > destination {
-			prevStation := i - 1
-			if prevStation < 0 {
-				prevStation = len(distance) - 1
-			}
-			counterClockWiseDst += distance[prevStation]
+		if clockWiseIndex == len(distance) {
+			clockWiseIndex = 0
 		}
+		clockWiseDst += distance[clockWiseIndex]
+		clockWiseIndex++
 	}
+
+	//TODO: 待完成
+
 	if counterClockWiseDst < clockWiseDst {
 		optimalDst = counterClockWiseDst
 	} else {

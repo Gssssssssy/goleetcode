@@ -66,6 +66,19 @@ func Test_distanceBetweenBusStops(t *testing.T) {
 				destination: 2,
 			},
 		},
+		//extra test case2: 超出时间限制
+		{
+			want: 1,
+			args: struct {
+				distance    []int
+				start       int
+				destination int
+			}{
+				distance:    []int{6, 47, 48, 1},
+				start:       3,
+				destination: 0,
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
