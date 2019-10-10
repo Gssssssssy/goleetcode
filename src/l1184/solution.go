@@ -19,31 +19,26 @@ Tips:
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 */
 
+func min(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
+}
+
 func distanceBetweenBusStops(distance []int, start int, destination int) int {
-	optimalDst := 0
+	totalDst, partDst := 0, 0
 
-	clockWiseIndex := start
-	clockWiseDst := 0
-
-	counterClockWiseDst := 0
-
-	for {
-		if clockWiseIndex == destination {
-			break
-		}
-		if clockWiseIndex == len(distance) {
-			clockWiseIndex = 0
-		}
-		clockWiseDst += distance[clockWiseIndex]
-		clockWiseIndex++
+	if start > destination {
+		start, destination = destination, start
 	}
 
-	//TODO: 待完成
-
-	if counterClockWiseDst < clockWiseDst {
-		optimalDst = counterClockWiseDst
-	} else {
-		optimalDst = clockWiseDst
+	for i, dst := range distance {
+		totalDst += dst
+		if start <= i && i < destination {
+			partDst += dst
+		}
 	}
-	return optimalDst
+
+	return min(partDst, totalDst-partDst)
 }
